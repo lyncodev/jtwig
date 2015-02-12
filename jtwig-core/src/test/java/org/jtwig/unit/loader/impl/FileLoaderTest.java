@@ -27,8 +27,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.parboiled.common.FileUtils;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
