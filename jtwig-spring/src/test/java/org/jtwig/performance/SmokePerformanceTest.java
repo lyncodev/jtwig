@@ -65,9 +65,15 @@ public class SmokePerformanceTest extends AbstractJtwigAcceptanceTest {
 
         System.out.println("Jobs queued... waiting to finish...");
         counter.await();
-        Seconds seconds = new Period(startDate, DateTime.now()).toStandardSeconds();
+        Seconds seconds = new Period(startDate, now()).toStandardSeconds();
         System.out.println(String.format("Finished in %s seconds (Speed: %d requests per second)",
-                seconds.toString(), CALLS / seconds.get(DurationFieldType.seconds())));
+                seconds.toString(), requestsPerSecond(seconds)));
+    }
+
+    private int requestsPerSecond(Seconds seconds) {
+        int value = seconds.get(DurationFieldType.seconds());
+        if (value == 0) return Integer.MAX_VALUE;
+        return CALLS / value;
     }
 
     @RequestMapping("/performance")
